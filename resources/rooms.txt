@@ -1,0 +1,13 @@
+1, 1, 4, Ocean Villa, 2 Bedrooms with living area, 300.0, 05-01-2024, 04-01-2024, 03-01-2024, 02-01-2024, 01-01-2024
+2, 1, 6, Ocean Villa, 3 Bedrooms with living area, 350.0, 03-02-2024, 02-02-2024
+3, 1, 4, Garden Villa, 2 Bedrooms with living area, 250.0
+4, 1, 2, Garden Bungalow, Twin Queens, 200.0, 07-04-2024, 06-04-2024, 05-04-2024
+5, 1, 2, Garden Bungalow, King bed, 200.0, 24-01-2024, 23-01-2024, 22-01-2024, 21-01-2024, 20-01-2024, 19-01-2024
+6, 2, 3, Deluxe Suite - Oceanfront, King bed with living area, 250.0
+7, 2, 3, Deluxe Suite - Gardenview, King bed with living area, 250.0
+8, 2, 3, Superior Suite - Prime Oceanfront Suite, Twin Queens, 200.0, 04-01-2024, 03-01-2024, 02-01-2024, 01-01-2024
+9, 2, 3, Superior Suite - Gardenview, Twin Queens, 200.0
+10, 3, 3, Deluxe Suite - Oceanfront, Twin Queens with living area, 250.0
+11, 3, 3, Deluxe Suite - Gardenview, Twin Queens with living area, 250.0
+12, 3, 3, Superior Suite - Prime Oceanfront Suite, King bed, 200.0
+13, 3, 3, Superior Suite - Gardenview, King bed, 200.0

@@ -1,0 +1,20 @@
+1,Shiv,95000.00,Concierge
+2,Kendall,71000.00,Lobby Boy
+3,Roman,120000.00,Hotel Manager
+4,Connor,120000.00,Restaurant Manager
+5,Logan,133000.00,Head Chef
+6,Gerri,92000.00,Front of House Manager
+7,Tom,77000.00,Night Duty Manager
+8,Caroline,133000.00,Accounting Manager
+9,Marcia,82000.00,Receptionist
+10,Greg,80000.00,Bellboy
+11,Lester,110000.00,Events Coordinator
+12,Frank,95000.00,Bartender
+13,Karolina,100000.00,Spa Manager
+14,Romanov,115000.00,Security Manager
+15,Hugo,85000.00,Housekeeping Supervisor
+16,Colin,65000.00,Housekeeping Attendant
+17,Stewy,68000.00,Waitstaff
+18,Zero,70000.00,Server
+19,Sandy,72000.00,Customer Service Representative
+20,Rhea,75000.00,Porter

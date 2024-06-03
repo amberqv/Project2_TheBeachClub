@@ -1,0 +1,10 @@
+1,Carm,Soprano,Hot Stones Massage,10 AM,60.00
+2,Tony,Soprano,Signature Massage,11 AM,60.00
+3,Michael,Corleone,Hot Stones Massage,4 PM,120.00
+4,Vito,Corleone,Aromatherapy Massage,2 PM,80.00
+5,Luca,Brasi,Swedish Massage,3 PM,70.00
+6,Peter,Clemenza,Deep Tissue Massage,4 PM,90.00
+7,Sonny,Corleone,Hot Stones Massage,5 PM,60.00
+8,Fredo,Corleone,Signature Massage,6 PM,100.00
+9,Vincent,Mancini,Reflexology Massage,7 PM,75.00
+10,Meadow,Soprano,Aromatherapy Massage,8 AM,250.00
