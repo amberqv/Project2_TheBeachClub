@@ -49,12 +49,16 @@ public class Home extends javax.swing.JFrame {
         TitlePanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         content = new javax.swing.JPanel();
+        resPage = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         guestPage = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        resPage = new javax.swing.JPanel();
         roomsPage = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
         spaPage = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         empPage = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,7 +148,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(resTabLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jLabel8)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         resTabLayout.setVerticalGroup(
             resTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,6 +190,9 @@ public class Home extends javax.swing.JFrame {
 
         empTab.setBackground(new java.awt.Color(237, 237, 237));
         empTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                empTabMousePressed(evt);
+            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 empTabMouseReleased(evt);
             }
@@ -241,6 +248,29 @@ public class Home extends javax.swing.JFrame {
         content.setBackground(new java.awt.Color(255, 255, 255));
         content.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        resPage.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setText("Reservations");
+
+        javax.swing.GroupLayout resPageLayout = new javax.swing.GroupLayout(resPage);
+        resPage.setLayout(resPageLayout);
+        resPageLayout.setHorizontalGroup(
+            resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(resPageLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jLabel3)
+                .addContainerGap(550, Short.MAX_VALUE))
+        );
+        resPageLayout.setVerticalGroup(
+            resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(resPageLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jLabel3)
+                .addContainerGap(426, Short.MAX_VALUE))
+        );
+
+        content.add(resPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         guestPage.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setText("Guests");
@@ -264,62 +294,71 @@ public class Home extends javax.swing.JFrame {
 
         content.add(guestPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        resPage.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout resPageLayout = new javax.swing.GroupLayout(resPage);
-        resPage.setLayout(resPageLayout);
-        resPageLayout.setHorizontalGroup(
-            resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
-        );
-        resPageLayout.setVerticalGroup(
-            resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
-        );
-
-        content.add(resPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
         roomsPage.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel12.setText("Rooms");
 
         javax.swing.GroupLayout roomsPageLayout = new javax.swing.GroupLayout(roomsPage);
         roomsPage.setLayout(roomsPageLayout);
         roomsPageLayout.setHorizontalGroup(
             roomsPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGroup(roomsPageLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel12)
+                .addContainerGap(571, Short.MAX_VALUE))
         );
         roomsPageLayout.setVerticalGroup(
             roomsPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+            .addGroup(roomsPageLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel12)
+                .addContainerGap(450, Short.MAX_VALUE))
         );
 
         content.add(roomsPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         spaPage.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel6.setText("Spa Appointments");
+
         javax.swing.GroupLayout spaPageLayout = new javax.swing.GroupLayout(spaPage);
         spaPage.setLayout(spaPageLayout);
         spaPageLayout.setHorizontalGroup(
             spaPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGroup(spaPageLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel6)
+                .addContainerGap(490, Short.MAX_VALUE))
         );
         spaPageLayout.setVerticalGroup(
             spaPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+            .addGroup(spaPageLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jLabel6)
+                .addContainerGap(422, Short.MAX_VALUE))
         );
 
         content.add(spaPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         empPage.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel11.setText("Employees");
+
         javax.swing.GroupLayout empPageLayout = new javax.swing.GroupLayout(empPage);
         empPage.setLayout(empPageLayout);
         empPageLayout.setHorizontalGroup(
             empPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGroup(empPageLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel11)
+                .addContainerGap(550, Short.MAX_VALUE))
         );
         empPageLayout.setVerticalGroup(
             empPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+            .addGroup(empPageLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel11)
+                .addContainerGap(440, Short.MAX_VALUE))
         );
 
         content.add(empPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -344,24 +383,48 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         setColor(guestTab);
         resetColor(new JPanel[]{roomTab,resTab,spaTab,empTab});
+        
+        guestPage.setVisible(true);
+        resPage.setVisible(false);
+        roomsPage.setVisible(false);
+        spaPage.setVisible(false);
+        empPage.setVisible(false);
     }//GEN-LAST:event_guestTabMousePressed
 
     private void resTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resTabMousePressed
         // TODO add your handling code here:
         setColor(resTab);
         resetColor(new JPanel[]{roomTab,guestTab,spaTab,empTab});
+        
+        guestPage.setVisible(false);
+        resPage.setVisible(true);
+        roomsPage.setVisible(false);
+        spaPage.setVisible(false);
+        empPage.setVisible(false);
     }//GEN-LAST:event_resTabMousePressed
 
     private void roomTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roomTabMousePressed
         // TODO add your handling code here:
         setColor(roomTab);
         resetColor(new JPanel[]{resTab,guestTab,spaTab,empTab});
+        
+        guestPage.setVisible(false);
+        resPage.setVisible(false);
+        roomsPage.setVisible(true);
+        spaPage.setVisible(false);
+        empPage.setVisible(false);
     }//GEN-LAST:event_roomTabMousePressed
 
     private void spaTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spaTabMousePressed
         // TODO add your handling code here:
         setColor(spaTab);
         resetColor(new JPanel[]{roomTab,guestTab,resTab,empTab});
+        
+        guestPage.setVisible(false);
+        resPage.setVisible(false);
+        roomsPage.setVisible(false);
+        spaPage.setVisible(true);
+        empPage.setVisible(false);
     }//GEN-LAST:event_spaTabMousePressed
 
     private void empTabMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_empTabMouseReleased
@@ -369,6 +432,16 @@ public class Home extends javax.swing.JFrame {
         setColor(empTab);
         resetColor(new JPanel[]{roomTab,guestTab,spaTab,resTab});
     }//GEN-LAST:event_empTabMouseReleased
+
+    private void empTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_empTabMousePressed
+        // TODO add your handling code here:
+        
+        guestPage.setVisible(false);
+        resPage.setVisible(false);
+        roomsPage.setVisible(false);
+        spaPage.setVisible(false);
+        empPage.setVisible(true);
+    }//GEN-LAST:event_empTabMousePressed
        int xy, xx;
     /**
      * @param args the command line arguments
@@ -427,9 +500,13 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel guestTab;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
