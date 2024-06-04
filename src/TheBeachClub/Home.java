@@ -101,6 +101,11 @@ public class Home extends javax.swing.JFrame {
         sidepanel.add(guestTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 79, 200, -1));
 
         roomTab.setBackground(new java.awt.Color(237, 237, 237));
+        roomTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                roomTabMousePressed(evt);
+            }
+        });
 
         jLabel7.setText("Rooms");
 
@@ -152,6 +157,11 @@ public class Home extends javax.swing.JFrame {
         sidepanel.add(resTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 139, -1, -1));
 
         spaTab.setBackground(new java.awt.Color(237, 237, 237));
+        spaTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                spaTabMousePressed(evt);
+            }
+        });
 
         jLabel9.setText("Spa");
 
@@ -175,6 +185,11 @@ public class Home extends javax.swing.JFrame {
         sidepanel.add(spaTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 251, 200, -1));
 
         empTab.setBackground(new java.awt.Color(237, 237, 237));
+        empTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                empTabMouseReleased(evt);
+            }
+        });
 
         jLabel10.setText("Employees");
 
@@ -336,6 +351,24 @@ public class Home extends javax.swing.JFrame {
         setColor(resTab);
         resetColor(new JPanel[]{roomTab,guestTab,spaTab,empTab});
     }//GEN-LAST:event_resTabMousePressed
+
+    private void roomTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roomTabMousePressed
+        // TODO add your handling code here:
+        setColor(roomTab);
+        resetColor(new JPanel[]{resTab,guestTab,spaTab,empTab});
+    }//GEN-LAST:event_roomTabMousePressed
+
+    private void spaTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spaTabMousePressed
+        // TODO add your handling code here:
+        setColor(spaTab);
+        resetColor(new JPanel[]{roomTab,guestTab,resTab,empTab});
+    }//GEN-LAST:event_spaTabMousePressed
+
+    private void empTabMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_empTabMouseReleased
+        // TODO add your handling code here:
+        setColor(empTab);
+        resetColor(new JPanel[]{roomTab,guestTab,spaTab,resTab});
+    }//GEN-LAST:event_empTabMouseReleased
        int xy, xx;
     /**
      * @param args the command line arguments
