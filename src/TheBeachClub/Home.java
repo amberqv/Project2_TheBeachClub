@@ -4,8 +4,17 @@
  */
 package TheBeachClub;
 
+import Project1.GuestUI;
 import java.awt.Color;
 import javax.swing.JPanel;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -20,6 +29,8 @@ public class Home extends javax.swing.JFrame {
         initComponents();
         setColor(guestTab);
         resetColor(new JPanel[]{roomTab,resTab,spaTab,empTab});
+                populateGuestTable(); // Call this method to populate the GuestTable when the form is initialized
+
         
         
     }
@@ -49,10 +60,14 @@ public class Home extends javax.swing.JFrame {
         TitlePanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         content = new javax.swing.JPanel();
+        guestPage = new javax.swing.JPanel();
+        GuestButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        GuestTable = new javax.swing.JTable();
+        addButton = new javax.swing.JButton();
+        IDTextField = new javax.swing.JTextField();
         resPage = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        guestPage = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         roomsPage = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         spaPage = new javax.swing.JPanel();
@@ -248,6 +263,84 @@ public class Home extends javax.swing.JFrame {
         content.setBackground(new java.awt.Color(255, 255, 255));
         content.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        guestPage.setBackground(new java.awt.Color(255, 255, 255));
+
+        GuestButton.setText("Guest");
+        GuestButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                GuestButtonMouseClicked(evt);
+            }
+        });
+
+        GuestTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "First Name", "Last Name", "Email", "Phone"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(GuestTable);
+
+        addButton.setText("Add");
+        addButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                addButtonMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout guestPageLayout = new javax.swing.GroupLayout(guestPage);
+        guestPage.setLayout(guestPageLayout);
+        guestPageLayout.setHorizontalGroup(
+            guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(guestPageLayout.createSequentialGroup()
+                .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(guestPageLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(guestPageLayout.createSequentialGroup()
+                                .addComponent(GuestButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guestPageLayout.createSequentialGroup()
+                                .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guestPageLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(260, 260, 260))
+        );
+        guestPageLayout.setVerticalGroup(
+            guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(guestPageLayout.createSequentialGroup()
+                .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(guestPageLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(GuestButton)
+                        .addGap(33, 33, 33)
+                        .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(addButton))
+                    .addGroup(guestPageLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(135, Short.MAX_VALUE))
+        );
+
+        content.add(guestPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         resPage.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setText("Reservations");
@@ -270,29 +363,6 @@ public class Home extends javax.swing.JFrame {
         );
 
         content.add(resPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        guestPage.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel2.setText("Guests");
-
-        javax.swing.GroupLayout guestPageLayout = new javax.swing.GroupLayout(guestPage);
-        guestPage.setLayout(guestPageLayout);
-        guestPageLayout.setHorizontalGroup(
-            guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(guestPageLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel2)
-                .addContainerGap(566, Short.MAX_VALUE))
-        );
-        guestPageLayout.setVerticalGroup(
-            guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(guestPageLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel2)
-                .addContainerGap(445, Short.MAX_VALUE))
-        );
-
-        content.add(guestPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         roomsPage.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -379,6 +449,36 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+private void populateGuestTable() {
+    DefaultTableModel model = (DefaultTableModel) GuestTable.getModel();
+    model.setRowCount(0); // Clear existing rows
+    
+    try {
+        // Establish database connection
+        Connection connection = DBConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT guestID, guest_firstName, guest_lastName, guest_email, guest_phone FROM Guest");
+        
+        while (resultSet.next()) {
+            int guestID = resultSet.getInt("guestID");
+            String firstName = resultSet.getString("guest_firstName");
+            String lastName = resultSet.getString("guest_lastName");
+            String email = resultSet.getString("guest_email");
+            String phone = resultSet.getString("guest_phone");
+            
+            model.addRow(new Object[]{guestID, firstName, lastName, email, phone});
+        }
+        
+        resultSet.close();
+        statement.close();
+        connection.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
+
+    
     private void guestTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guestTabMousePressed
         // TODO add your handling code here:
         setColor(guestTab);
@@ -442,6 +542,36 @@ public class Home extends javax.swing.JFrame {
         spaPage.setVisible(false);
         empPage.setVisible(true);
     }//GEN-LAST:event_empTabMousePressed
+
+    private void GuestButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuestButtonMouseClicked
+        // TODO add your handling code here:
+        // Create an instance of the GuestUI panel
+    // Create an instance of the GuestUI frame
+    GuestUI guestUI = new GuestUI();
+    
+    // Set the GuestUI frame visible
+    guestUI.setVisible(true);
+    
+    // Hide the current Home frame (optional)
+    this.setVisible(false);
+    }//GEN-LAST:event_GuestButtonMouseClicked
+
+    private void addButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMousePressed
+        // TODO add your handling code here:
+        
+        // Get the values from the text fields
+    int guestID = Integer.parseInt(IDTextField.getText());
+
+    
+    // Create a new Guest object
+    Guest guest = new Guest(guestID, "", "", "", "");
+    
+    // Add the guest to the database
+    GuestManager.addGuest(guest);
+    
+    // Populate the table with the updated guest list
+    populateGuestTable();
+    }//GEN-LAST:event_addButtonMousePressed
        int xy, xx;
     /**
      * @param args the command line arguments
@@ -491,8 +621,12 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton GuestButton;
+    private javax.swing.JTable GuestTable;
+    private javax.swing.JTextField IDTextField;
     private javax.swing.JPanel Parent;
     private javax.swing.JPanel TitlePanel;
+    private javax.swing.JButton addButton;
     private javax.swing.JPanel content;
     private javax.swing.JPanel empPage;
     private javax.swing.JPanel empTab;
@@ -502,7 +636,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -510,6 +643,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel resPage;
     private javax.swing.JPanel resTab;
     private javax.swing.JPanel roomTab;
