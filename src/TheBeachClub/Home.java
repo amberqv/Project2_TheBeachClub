@@ -29,7 +29,9 @@ public class Home extends javax.swing.JFrame {
         initComponents();
         setColor(guestTab);
         resetColor(new JPanel[]{roomTab,resTab,spaTab,empTab});
-                populateGuestTable(); // Call this method to populate the GuestTable when the form is initialized
+        
+        
+        populateGuestTable(); // Call this method to populate the GuestTable when the form is initialized
 
         
         
@@ -68,6 +70,7 @@ public class Home extends javax.swing.JFrame {
         IDTextField = new javax.swing.JTextField();
         resPage = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        guestUI1 = new TheBeachClub.GuestUI();
         roomsPage = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         spaPage = new javax.swing.JPanel();
@@ -309,12 +312,9 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(guestPageLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(guestPageLayout.createSequentialGroup()
-                                .addComponent(GuestButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guestPageLayout.createSequentialGroup()
-                                .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(GuestButton)
+                            .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guestPageLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(addButton)
@@ -351,15 +351,19 @@ public class Home extends javax.swing.JFrame {
             resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(resPageLayout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addComponent(jLabel3)
-                .addContainerGap(550, Short.MAX_VALUE))
+                .addGroup(resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(guestUI1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
         resPageLayout.setVerticalGroup(
             resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(resPageLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(jLabel3)
-                .addContainerGap(426, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(guestUI1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         content.add(resPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -632,6 +636,7 @@ private void populateGuestTable() {
     private javax.swing.JPanel empTab;
     private javax.swing.JPanel guestPage;
     private javax.swing.JPanel guestTab;
+    private TheBeachClub.GuestUI guestUI1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
