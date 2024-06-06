@@ -46,6 +46,8 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         Parent = new javax.swing.JPanel();
         sidepanel = new javax.swing.JPanel();
         guestTab = new javax.swing.JPanel();
@@ -67,16 +69,22 @@ public class Home extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         GuestTable = new javax.swing.JTable();
         addButton = new javax.swing.JButton();
-        IDTextField = new javax.swing.JTextField();
+        guestIDTextField = new javax.swing.JTextField();
+        guestFirstNameTextField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         resPage = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        guestUI1 = new TheBeachClub.GuestUI();
+        reservationUI1 = new TheBeachClub.ReservationUI();
         roomsPage = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
+        roomUI1 = new TheBeachClub.RoomUI();
         spaPage = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         empPage = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+
+        jFormattedTextField1.setText("jFormattedTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -251,7 +259,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(TitlePanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(351, Short.MAX_VALUE))
+                .addContainerGap(421, Short.MAX_VALUE))
         );
         TitlePanelLayout.setVerticalGroup(
             TitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,7 +269,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(17, 17, 17))
         );
 
-        Parent.add(TitlePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 640, 80));
+        Parent.add(TitlePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 710, 80));
 
         content.setBackground(new java.awt.Color(255, 255, 255));
         content.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -303,24 +311,36 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("ID");
+
+        jLabel13.setText("First Name");
+
         javax.swing.GroupLayout guestPageLayout = new javax.swing.GroupLayout(guestPage);
         guestPage.setLayout(guestPageLayout);
         guestPageLayout.setHorizontalGroup(
             guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(guestPageLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(guestPageLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(GuestButton)
-                            .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guestPageLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(addButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(260, 260, 260))
+                        .addGap(61, 61, 61))
+                    .addGroup(guestPageLayout.createSequentialGroup()
+                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(guestPageLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(guestFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(guestIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(GuestButton)
+                            .addGroup(guestPageLayout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel13)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(199, 199, 199))
         );
         guestPageLayout.setVerticalGroup(
             guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,17 +349,26 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(guestPageLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(GuestButton)
-                        .addGap(33, 33, 33)
-                        .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
+                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(guestPageLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(28, 28, 28))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guestPageLayout.createSequentialGroup()
+                                .addComponent(guestIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(guestFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(111, 111, 111)
                         .addComponent(addButton))
                     .addGroup(guestPageLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(135, Short.MAX_VALUE))
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(341, Short.MAX_VALUE))
         );
 
-        content.add(guestPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        content.add(guestPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, -1));
 
         resPage.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -350,20 +379,23 @@ public class Home extends javax.swing.JFrame {
         resPageLayout.setHorizontalGroup(
             resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(resPageLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
                 .addGroup(resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(guestUI1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addContainerGap(180, Short.MAX_VALUE))
+                    .addGroup(resPageLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel3))
+                    .addGroup(resPageLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(reservationUI1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         resPageLayout.setVerticalGroup(
             resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(resPageLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(jLabel3)
-                .addGap(30, 30, 30)
-                .addComponent(guestUI1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reservationUI1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         content.add(resPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -380,13 +412,19 @@ public class Home extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel12)
                 .addContainerGap(571, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roomsPageLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(roomUI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         roomsPageLayout.setVerticalGroup(
             roomsPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roomsPageLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel12)
-                .addContainerGap(450, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(roomUI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         content.add(roomsPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -564,11 +602,15 @@ private void populateGuestTable() {
         // TODO add your handling code here:
         
         // Get the values from the text fields
-    int guestID = Integer.parseInt(IDTextField.getText());
+    int guestID = Integer.parseInt(guestIDTextField.getText());
+    String firstName = guestFirstNameTextField.getText();
+//    String lastName = lastNameTextField.getText();
+//    String email = emailTextField.getText();
+//    String phone = phoneTextField.getText();
 
     
     // Create a new Guest object
-    Guest guest = new Guest(guestID, "", "", "", "");
+    Guest guest = new Guest(guestID, firstName, "", "", "");
     
     // Add the guest to the database
     GuestManager.addGuest(guest);
@@ -627,20 +669,24 @@ private void populateGuestTable() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GuestButton;
     private javax.swing.JTable GuestTable;
-    private javax.swing.JTextField IDTextField;
     private javax.swing.JPanel Parent;
     private javax.swing.JPanel TitlePanel;
     private javax.swing.JButton addButton;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel content;
     private javax.swing.JPanel empPage;
     private javax.swing.JPanel empTab;
+    private javax.swing.JTextField guestFirstNameTextField;
+    private javax.swing.JTextField guestIDTextField;
     private javax.swing.JPanel guestPage;
     private javax.swing.JPanel guestTab;
-    private TheBeachClub.GuestUI guestUI1;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -651,7 +697,9 @@ private void populateGuestTable() {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel resPage;
     private javax.swing.JPanel resTab;
+    private TheBeachClub.ReservationUI reservationUI1;
     private javax.swing.JPanel roomTab;
+    private TheBeachClub.RoomUI roomUI1;
     private javax.swing.JPanel roomsPage;
     private javax.swing.JPanel sidepanel;
     private javax.swing.JPanel spaPage;

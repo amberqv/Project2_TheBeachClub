@@ -8,23 +8,23 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author triciaamber
  */
-public class GuestUI extends javax.swing.JPanel {
+public class ReservationUI extends javax.swing.JPanel {
 
     /**
-     * Creates new form GuestUI
+     * Creates new form ReservationUI
      */
-    public GuestUI() {
+    public ReservationUI() {
         initComponents();
         
-        // *
-        populateGuestTable(); // Call this method to populate the GuestTable when the form is initialized
-
+        // Method
+        populateResTable();
     }
 
     /**
@@ -37,9 +37,9 @@ public class GuestUI extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        GuestTable = new javax.swing.JTable();
+        resTable = new javax.swing.JTable();
 
-        GuestTable.setModel(new javax.swing.table.DefaultTableModel(
+        resTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -47,48 +47,47 @@ public class GuestUI extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "guestID", "Title 2", "Last Name", "Title 4", "Title 5"
+                "Reservation ID", "Check In", "Check Out", "Room ID", "Guest ID"
             }
         ));
-        jScrollPane1.setViewportView(GuestTable);
+        jScrollPane1.setViewportView(resTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(117, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(111, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(131, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
-    private void populateGuestTable() {
-    DefaultTableModel model = (DefaultTableModel) GuestTable.getModel();
+    private void populateResTable() {
+    DefaultTableModel model = (DefaultTableModel) resTable.getModel();
     model.setRowCount(0); // Clear existing rows
     
     try {
         // Establish database connection
         Connection connection = DBConnection.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT guestID, guest_firstName, guest_lastName, guest_email, guest_phone FROM Guest");
+        ResultSet resultSet = statement.executeQuery("SELECT resID, res_checkIn, res_checkOut, ROOM_ID, guestID FROM reservation");
         
         while (resultSet.next()) {
+            int resID = resultSet.getInt("resID");
+            Date checkInDate = resultSet.getDate("res_checkIn");
+            Date checkOutDate = resultSet.getDate("res_checkOut");
+            int roomID = resultSet.getInt("ROOM_ID");
             int guestID = resultSet.getInt("guestID");
-            String firstName = resultSet.getString("guest_firstName");
-            String lastName = resultSet.getString("guest_lastName");
-            String email = resultSet.getString("guest_email");
-            String phone = resultSet.getString("guest_phone");
             
-            model.addRow(new Object[]{guestID, firstName, lastName, email, phone});
+            model.addRow(new Object[]{resID, checkInDate, checkOutDate, roomID, guestID});
         }
         
         resultSet.close();
@@ -98,10 +97,11 @@ public class GuestUI extends javax.swing.JPanel {
         e.printStackTrace();
     }
 }
+
     
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable GuestTable;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable resTable;
     // End of variables declaration//GEN-END:variables
 }
