@@ -37,6 +37,8 @@ public class RoomUI extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         RoomTable = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         RoomTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

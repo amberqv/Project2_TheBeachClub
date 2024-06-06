@@ -48,13 +48,14 @@ public class Home extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         Parent = new javax.swing.JPanel();
         sidepanel = new javax.swing.JPanel();
+        roomTab = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         guestTab = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        roomTab = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         resTab = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         spaTab = new javax.swing.JPanel();
@@ -68,17 +69,23 @@ public class Home extends javax.swing.JFrame {
         GuestButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         GuestTable = new javax.swing.JTable();
-        addButton = new javax.swing.JButton();
-        guestIDTextField = new javax.swing.JTextField();
-        guestFirstNameTextField = new javax.swing.JTextField();
+        guest_addButton = new javax.swing.JButton();
+        guest_idTF = new javax.swing.JTextField();
+        guest_firstNameTF = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        guest_lastNameTF = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        guest_emailTF = new javax.swing.JTextField();
+        guest_emailTF1 = new javax.swing.JTextField();
+        roomsPage = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        roomUI = new TheBeachClub.RoomUI();
         resPage = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         reservationUI1 = new TheBeachClub.ReservationUI();
-        roomsPage = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        roomUI1 = new TheBeachClub.RoomUI();
         spaPage = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         empPage = new javax.swing.JPanel();
@@ -86,7 +93,12 @@ public class Home extends javax.swing.JFrame {
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setResizable(false);
 
         Parent.setBackground(new java.awt.Color(153, 153, 153));
         Parent.setForeground(new java.awt.Color(255, 255, 255));
@@ -94,6 +106,34 @@ public class Home extends javax.swing.JFrame {
 
         sidepanel.setBackground(new java.awt.Color(237, 237, 237));
         sidepanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        roomTab.setBackground(new java.awt.Color(237, 237, 237));
+        roomTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                roomTabMousePressed(evt);
+            }
+        });
+
+        jLabel7.setText("Rooms");
+
+        javax.swing.GroupLayout roomTabLayout = new javax.swing.GroupLayout(roomTab);
+        roomTab.setLayout(roomTabLayout);
+        roomTabLayout.setHorizontalGroup(
+            roomTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roomTabLayout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        roomTabLayout.setVerticalGroup(
+            roomTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roomTabLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel7)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        sidepanel.add(roomTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 200, 180, -1));
 
         guestTab.setBackground(new java.awt.Color(237, 237, 237));
         guestTab.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -128,35 +168,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
-        sidepanel.add(guestTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 79, 200, -1));
-
-        roomTab.setBackground(new java.awt.Color(237, 237, 237));
-        roomTab.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                roomTabMousePressed(evt);
-            }
-        });
-
-        jLabel7.setText("Rooms");
-
-        javax.swing.GroupLayout roomTabLayout = new javax.swing.GroupLayout(roomTab);
-        roomTab.setLayout(roomTabLayout);
-        roomTabLayout.setHorizontalGroup(
-            roomTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roomTabLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        roomTabLayout.setVerticalGroup(
-            roomTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roomTabLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel7)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-
-        sidepanel.add(roomTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 195, 200, -1));
+        sidepanel.add(guestTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 80, 180, -1));
 
         resTab.setBackground(new java.awt.Color(237, 237, 237));
         resTab.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,7 +186,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(resTabLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jLabel8)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         resTabLayout.setVerticalGroup(
             resTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,7 +196,7 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        sidepanel.add(resTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 139, -1, -1));
+        sidepanel.add(resTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 140, 180, -1));
 
         spaTab.setBackground(new java.awt.Color(237, 237, 237));
         spaTab.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -212,7 +224,7 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        sidepanel.add(spaTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 251, 200, -1));
+        sidepanel.add(spaTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 250, 180, -1));
 
         empTab.setBackground(new java.awt.Color(237, 237, 237));
         empTab.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -243,9 +255,9 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        sidepanel.add(empTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 307, 200, -1));
+        sidepanel.add(empTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 310, 180, -1));
 
-        Parent.add(sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 570));
+        Parent.add(sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 570));
 
         TitlePanel.setBackground(new java.awt.Color(245, 245, 245));
 
@@ -259,7 +271,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(TitlePanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(421, Short.MAX_VALUE))
+                .addContainerGap(581, Short.MAX_VALUE))
         );
         TitlePanelLayout.setVerticalGroup(
             TitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,7 +281,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(17, 17, 17))
         );
 
-        Parent.add(TitlePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 710, 80));
+        Parent.add(TitlePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 870, 80));
 
         content.setBackground(new java.awt.Color(255, 255, 255));
         content.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -304,10 +316,10 @@ public class Home extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(GuestTable);
 
-        addButton.setText("Add");
-        addButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        guest_addButton.setText("Add");
+        guest_addButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                addButtonMousePressed(evt);
+                guest_addButtonMousePressed(evt);
             }
         });
 
@@ -315,32 +327,45 @@ public class Home extends javax.swing.JFrame {
 
         jLabel13.setText("First Name");
 
+        jLabel14.setText("Surname");
+
+        jLabel15.setText("Email");
+
+        jLabel16.setText("Phone No.");
+
         javax.swing.GroupLayout guestPageLayout = new javax.swing.GroupLayout(guestPage);
         guestPage.setLayout(guestPageLayout);
         guestPageLayout.setHorizontalGroup(
             guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(guestPageLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(GuestButton)
+                .addGap(695, 695, 695))
+            .addGroup(guestPageLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
                 .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(guestPageLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(addButton)
-                        .addGap(61, 61, 61))
-                    .addGroup(guestPageLayout.createSequentialGroup()
-                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(guestPageLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guestPageLayout.createSequentialGroup()
+                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(guestFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(guestIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(GuestButton)
-                            .addGroup(guestPageLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel13)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(199, 199, 199))
+                                .addComponent(jLabel13))
+                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(guest_emailTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(guest_idTF)
+                                .addComponent(guest_firstNameTF)
+                                .addComponent(guest_lastNameTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guestPageLayout.createSequentialGroup()
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(guest_emailTF1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(guest_addButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
         guestPageLayout.setVerticalGroup(
             guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,56 +374,35 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(guestPageLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(GuestButton)
+                        .addGap(49, 49, 49)
+                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(guest_idTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
                         .addGap(18, 18, 18)
-                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(guestPageLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(28, 28, 28))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guestPageLayout.createSequentialGroup()
-                                .addComponent(guestIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(guestFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(111, 111, 111)
-                        .addComponent(addButton))
+                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(guest_firstNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13))
+                        .addGap(18, 18, 18)
+                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(guest_lastNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))
+                        .addGap(18, 18, 18)
+                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(guest_emailTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15))
+                        .addGap(18, 18, 18)
+                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(guest_emailTF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16))
+                        .addGap(18, 18, 18)
+                        .addComponent(guest_addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(guestPageLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(341, Short.MAX_VALUE))
+                        .addGap(46, 46, 46)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
 
-        content.add(guestPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, -1));
-
-        resPage.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel3.setText("Reservations");
-
-        javax.swing.GroupLayout resPageLayout = new javax.swing.GroupLayout(resPage);
-        resPage.setLayout(resPageLayout);
-        resPageLayout.setHorizontalGroup(
-            resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(resPageLayout.createSequentialGroup()
-                .addGroup(resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(resPageLayout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabel3))
-                    .addGroup(resPageLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(reservationUI1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(86, Short.MAX_VALUE))
-        );
-        resPageLayout.setVerticalGroup(
-            resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(resPageLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(reservationUI1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
-        );
-
-        content.add(resPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        content.add(guestPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 490));
 
         roomsPage.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -411,23 +415,51 @@ public class Home extends javax.swing.JFrame {
             .addGroup(roomsPageLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel12)
-                .addContainerGap(571, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roomsPageLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(roomUI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(140, 140, 140)
+                .addComponent(roomUI, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         roomsPageLayout.setVerticalGroup(
             roomsPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roomsPageLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(roomUI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGroup(roomsPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(roomUI, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
 
-        content.add(roomsPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        content.add(roomsPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, -1));
+
+        resPage.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setText("Reservations");
+
+        javax.swing.GroupLayout resPageLayout = new javax.swing.GroupLayout(resPage);
+        resPage.setLayout(resPageLayout);
+        resPageLayout.setHorizontalGroup(
+            resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(resPageLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addComponent(reservationUI1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
+        );
+        resPageLayout.setVerticalGroup(
+            resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(resPageLayout.createSequentialGroup()
+                .addGroup(resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(resPageLayout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jLabel3))
+                    .addGroup(resPageLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(reservationUI1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(73, Short.MAX_VALUE))
+        );
+
+        content.add(resPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, -1));
 
         spaPage.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -440,7 +472,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(spaPageLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jLabel6)
-                .addContainerGap(490, Short.MAX_VALUE))
+                .addContainerGap(720, Short.MAX_VALUE))
         );
         spaPageLayout.setVerticalGroup(
             spaPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,7 +482,7 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(422, Short.MAX_VALUE))
         );
 
-        content.add(spaPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        content.add(spaPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, -1));
 
         empPage.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -463,7 +495,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(empPageLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel11)
-                .addContainerGap(550, Short.MAX_VALUE))
+                .addContainerGap(780, Short.MAX_VALUE))
         );
         empPageLayout.setVerticalGroup(
             empPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -473,9 +505,9 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(440, Short.MAX_VALUE))
         );
 
-        content.add(empPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        content.add(empPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, -1));
 
-        Parent.add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 640, 490));
+        Parent.add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 870, 490));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -489,37 +521,42 @@ public class Home extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-private void populateGuestTable() {
-    DefaultTableModel model = (DefaultTableModel) GuestTable.getModel();
-    model.setRowCount(0); // Clear existing rows
     
-    try {
-        // Establish database connection
-        Connection connection = DBConnection.getConnection();
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT guestID, guest_firstName, guest_lastName, guest_email, guest_phone FROM Guest");
+    
+        // GuestTable
         
-        while (resultSet.next()) {
-            int guestID = resultSet.getInt("guestID");
-            String firstName = resultSet.getString("guest_firstName");
-            String lastName = resultSet.getString("guest_lastName");
-            String email = resultSet.getString("guest_email");
-            String phone = resultSet.getString("guest_phone");
-            
-            model.addRow(new Object[]{guestID, firstName, lastName, email, phone});
+        private void populateGuestTable() {
+            DefaultTableModel model = (DefaultTableModel) GuestTable.getModel();
+            model.setRowCount(0); // Clear existing rows
+
+            try {
+                // Establish database connection
+                Connection connection = DBConnection.getConnection();
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery("SELECT guestID, guest_firstName, guest_lastName, guest_email, guest_phone FROM Guest");
+
+                while (resultSet.next()) {
+                    int guestID = resultSet.getInt("guestID");
+                    String firstName = resultSet.getString("guest_firstName");
+                    String lastName = resultSet.getString("guest_lastName");
+                    String email = resultSet.getString("guest_email");
+                    String phone = resultSet.getString("guest_phone");
+
+                    model.addRow(new Object[]{guestID, firstName, lastName, email, phone});
+                }
+
+                resultSet.close();
+                statement.close();
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         
-        resultSet.close();
-        statement.close();
-        connection.close();
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-}
-
-
+        
     
     private void guestTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guestTabMousePressed
         // TODO add your handling code here:
@@ -598,26 +635,26 @@ private void populateGuestTable() {
     this.setVisible(false);
     }//GEN-LAST:event_GuestButtonMouseClicked
 
-    private void addButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMousePressed
+    private void guest_addButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guest_addButtonMousePressed
         // TODO add your handling code here:
         
         // Get the values from the text fields
-    int guestID = Integer.parseInt(guestIDTextField.getText());
-    String firstName = guestFirstNameTextField.getText();
-//    String lastName = lastNameTextField.getText();
-//    String email = emailTextField.getText();
-//    String phone = phoneTextField.getText();
+    int guestID = Integer.parseInt(guest_idTF.getText());
+    String firstName = guest_firstNameTF.getText();
+    String lastName = guest_lastNameTF.getText();
+    String email = guest_emailTF.getText();
+    String phone = guest_emailTF1.getText();
 
     
     // Create a new Guest object
-    Guest guest = new Guest(guestID, firstName, "", "", "");
+    Guest guest = new Guest(guestID, firstName, lastName, email, phone);
     
     // Add the guest to the database
     GuestManager.addGuest(guest);
     
     // Populate the table with the updated guest list
     populateGuestTable();
-    }//GEN-LAST:event_addButtonMousePressed
+    }//GEN-LAST:event_guest_addButtonMousePressed
        int xy, xx;
     /**
      * @param args the command line arguments
@@ -671,21 +708,28 @@ private void populateGuestTable() {
     private javax.swing.JTable GuestTable;
     private javax.swing.JPanel Parent;
     private javax.swing.JPanel TitlePanel;
-    private javax.swing.JButton addButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel content;
     private javax.swing.JPanel empPage;
     private javax.swing.JPanel empTab;
-    private javax.swing.JTextField guestFirstNameTextField;
-    private javax.swing.JTextField guestIDTextField;
     private javax.swing.JPanel guestPage;
     private javax.swing.JPanel guestTab;
+    private javax.swing.JButton guest_addButton;
+    private javax.swing.JTextField guest_emailTF;
+    private javax.swing.JTextField guest_emailTF1;
+    private javax.swing.JTextField guest_firstNameTF;
+    private javax.swing.JTextField guest_idTF;
+    private javax.swing.JTextField guest_lastNameTF;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -699,7 +743,7 @@ private void populateGuestTable() {
     private javax.swing.JPanel resTab;
     private TheBeachClub.ReservationUI reservationUI1;
     private javax.swing.JPanel roomTab;
-    private TheBeachClub.RoomUI roomUI1;
+    private TheBeachClub.RoomUI roomUI;
     private javax.swing.JPanel roomsPage;
     private javax.swing.JPanel sidepanel;
     private javax.swing.JPanel spaPage;
