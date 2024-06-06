@@ -1,7 +1,7 @@
-Thu Jun 06 13:55:41 NZST 2024 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
+Thu Jun 06 14:54:02 NZST 2024 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Thu Jun 06 13:55:41 NZST 2024:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-018f-eb42-496c-0000017b0897 
+Thu Jun 06 14:54:07 NZST 2024:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-018f-eb77-b711-0000017b0897 
 on database directory C:\Users\sarak\OneDrive\Documents\AUT Computer and Information Sciences\Y2 - Sem 1\Program Design and Construction\Assignment 2\Project2_TheBeachClub\thebeachclubDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@30946e09 
 Loaded from file:/C:/Users/sarak/OneDrive/Documents/AUT%20Computer%20and%20Information%20Sciences/Y2%20-%20Sem%201/Program%20Design%20and%20Construction/db-derby-10.14.2.0-lib/db-derby-10.14.2.0-lib/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -12,3 +12,9 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\sarak\OneDrive\Documents\AUT Computer and Information Sciences\Y2 - Sem 1\Program Design and Construction\Assignment 2\Project2_TheBeachClub
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Thu Jun 06 14:56:40 NZST 2024: Shutting down Derby engine
+----------------------------------------------------------------
+Thu Jun 06 14:56:40 NZST 2024:
+Shutting down instance a816c00e-018f-eb77-b711-0000017b0897 on database directory C:\Users\sarak\OneDrive\Documents\AUT Computer and Information Sciences\Y2 - Sem 1\Program Design and Construction\Assignment 2\Project2_TheBeachClub\thebeachclubDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@30946e09 
+----------------------------------------------------------------
