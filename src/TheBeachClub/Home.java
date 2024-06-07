@@ -12,8 +12,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 
 /**
@@ -21,6 +24,9 @@ import javax.swing.table.DefaultTableModel;
  * @author triciaamber
  */
 public class Home extends javax.swing.JFrame {
+    
+        private ReservationManager reservationManager;
+
 
     /**
      * Creates new form Home
@@ -32,7 +38,10 @@ public class Home extends javax.swing.JFrame {
         
         
         populateGuestTable(); // Call this method to populate the GuestTable when the form is initialized
+        setColumnWidths(); // Call this method to set the column widths
 
+        
+        reservationManager = new ReservationManager();
         
         
     }
@@ -67,25 +76,37 @@ public class Home extends javax.swing.JFrame {
         content = new javax.swing.JPanel();
         guestPage = new javax.swing.JPanel();
         GuestButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        GuestTable = new javax.swing.JTable();
-        guest_addButton = new javax.swing.JButton();
-        guest_idTF = new javax.swing.JTextField();
-        guest_firstNameTF = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         guest_lastNameTF = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         guest_emailTF = new javax.swing.JTextField();
         guest_emailTF1 = new javax.swing.JTextField();
+        guest_idTF = new javax.swing.JTextField();
+        guest_firstNameTF = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        guest_addButton = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        GuestTable = new javax.swing.JTable();
         roomsPage = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         roomUI = new TheBeachClub.RoomUI();
         resPage = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         reservationUI1 = new TheBeachClub.ReservationUI();
+        bookButton = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        checkin_datechooser = new com.toedter.calendar.JDateChooser();
+        checkout_datechooser = new com.toedter.calendar.JDateChooser();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        availableRoomsTable = new javax.swing.JTable();
+        capacityTextField = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
         spaPage = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         empPage = new javax.swing.JPanel();
@@ -271,7 +292,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(TitlePanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(581, Short.MAX_VALUE))
+                .addContainerGap(811, Short.MAX_VALUE))
         );
         TitlePanelLayout.setVerticalGroup(
             TitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,7 +302,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(17, 17, 17))
         );
 
-        Parent.add(TitlePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 870, 80));
+        Parent.add(TitlePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 1100, 80));
 
         content.setBackground(new java.awt.Color(255, 255, 255));
         content.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -294,6 +315,31 @@ public class Home extends javax.swing.JFrame {
                 GuestButtonMouseClicked(evt);
             }
         });
+
+        jLabel14.setText("Surname");
+
+        jLabel15.setText("Email");
+
+        jLabel16.setText("Phone No.");
+
+        jLabel2.setText("ID");
+
+        jLabel13.setText("First Name");
+
+        guest_addButton.setText("Add");
+        guest_addButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                guest_addButtonMousePressed(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
+        jLabel17.setText("Information");
+
+        jPanel1.setBackground(new java.awt.Color(245, 245, 245));
+
+        jLabel18.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
+        jLabel18.setText("Members:");
 
         GuestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -314,67 +360,82 @@ public class Home extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        GuestTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(GuestTable);
+        if (GuestTable.getColumnModel().getColumnCount() > 0) {
+            GuestTable.getColumnModel().getColumn(3).setResizable(false);
+            GuestTable.getColumnModel().getColumn(4).setResizable(false);
+        }
 
-        guest_addButton.setText("Add");
-        guest_addButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                guest_addButtonMousePressed(evt);
-            }
-        });
-
-        jLabel2.setText("ID");
-
-        jLabel13.setText("First Name");
-
-        jLabel14.setText("Surname");
-
-        jLabel15.setText("Email");
-
-        jLabel16.setText("Phone No.");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel18)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout guestPageLayout = new javax.swing.GroupLayout(guestPage);
         guestPage.setLayout(guestPageLayout);
         guestPageLayout.setHorizontalGroup(
             guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(guestPageLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(GuestButton)
-                .addGap(695, 695, 695))
-            .addGroup(guestPageLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
                 .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guestPageLayout.createSequentialGroup()
-                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel13))
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                    .addGroup(guestPageLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(GuestButton))
+                    .addGroup(guestPageLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
                         .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(guest_emailTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(guest_idTF)
-                                .addComponent(guest_firstNameTF)
-                                .addComponent(guest_lastNameTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guestPageLayout.createSequentialGroup()
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(guest_emailTF1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(guest_addButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                            .addComponent(jLabel17)
+                            .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(guest_addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(guestPageLayout.createSequentialGroup()
+                                    .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel13))
+                                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(guest_emailTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(guest_idTF)
+                                            .addComponent(guest_firstNameTF)
+                                            .addComponent(guest_lastNameTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(guestPageLayout.createSequentialGroup()
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(guest_emailTF1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(48, 48, 48)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         guestPageLayout.setVerticalGroup(
             guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(guestPageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(GuestButton)
+                .addGap(30, 30, 30)
                 .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(guestPageLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(GuestButton)
-                        .addGap(49, 49, 49)
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel17)
+                        .addGap(18, 18, 18)
                         .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(guest_idTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
@@ -394,15 +455,13 @@ public class Home extends javax.swing.JFrame {
                         .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(guest_emailTF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(guest_addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(guestPageLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(146, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
-        content.add(guestPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 490));
+        content.add(guestPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 490));
 
         roomsPage.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -417,7 +476,7 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jLabel12)
                 .addGap(140, 140, 140)
                 .addComponent(roomUI, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(336, Short.MAX_VALUE))
         );
         roomsPageLayout.setVerticalGroup(
             roomsPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -429,37 +488,51 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(145, Short.MAX_VALUE))
         );
 
-        content.add(roomsPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, -1));
+        content.add(roomsPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, -1));
 
         resPage.setBackground(new java.awt.Color(255, 255, 255));
+        resPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setText("Reservations");
+        resPage.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 22, -1, -1));
+        resPage.add(reservationUI1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 197, 597, 287));
 
-        javax.swing.GroupLayout resPageLayout = new javax.swing.GroupLayout(resPage);
-        resPage.setLayout(resPageLayout);
-        resPageLayout.setHorizontalGroup(
-            resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(resPageLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
-                .addComponent(reservationUI1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
-        );
-        resPageLayout.setVerticalGroup(
-            resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(resPageLayout.createSequentialGroup()
-                .addGroup(resPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(resPageLayout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel3))
-                    .addGroup(resPageLayout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(reservationUI1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(73, Short.MAX_VALUE))
-        );
+        bookButton.setText("BOOK NOW");
+        bookButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bookButtonMousePressed(evt);
+            }
+        });
+        resPage.add(bookButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 87, 133, 40));
 
-        content.add(resPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, -1));
+        jLabel19.setText("CHECK-IN");
+        resPage.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 81, -1, -1));
+
+        jLabel20.setText("CHECK-OUT");
+        resPage.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 81, -1, -1));
+        resPage.add(checkin_datechooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 104, 141, -1));
+        resPage.add(checkout_datechooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 104, 141, -1));
+
+        availableRoomsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Room No.", "Type", "Capacity", "Price"
+            }
+        ));
+        jScrollPane2.setViewportView(availableRoomsTable);
+
+        resPage.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 47, 318, 123));
+        resPage.add(capacityTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 145, 97, 17));
+
+        jLabel21.setText("Capacity");
+        resPage.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 145, -1, -1));
+
+        content.add(resPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, -1));
 
         spaPage.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -472,7 +545,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(spaPageLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jLabel6)
-                .addContainerGap(720, Short.MAX_VALUE))
+                .addContainerGap(950, Short.MAX_VALUE))
         );
         spaPageLayout.setVerticalGroup(
             spaPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -482,7 +555,7 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(422, Short.MAX_VALUE))
         );
 
-        content.add(spaPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, -1));
+        content.add(spaPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, -1));
 
         empPage.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -495,7 +568,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(empPageLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel11)
-                .addContainerGap(780, Short.MAX_VALUE))
+                .addContainerGap(1010, Short.MAX_VALUE))
         );
         empPageLayout.setVerticalGroup(
             empPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -505,9 +578,9 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(440, Short.MAX_VALUE))
         );
 
-        content.add(empPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, -1));
+        content.add(empPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, -1));
 
-        Parent.add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 870, 490));
+        Parent.add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 1100, 490));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -556,6 +629,15 @@ public class Home extends javax.swing.JFrame {
             }
         }
         
+        
+        private void setColumnWidths() {
+        TableColumnModel columnModel = GuestTable.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(50);  // guestID
+        columnModel.getColumn(1).setPreferredWidth(100); // First Name
+        columnModel.getColumn(2).setPreferredWidth(100); // Last Name
+        columnModel.getColumn(3).setPreferredWidth(250); // Email
+        columnModel.getColumn(4).setPreferredWidth(100); // Phone
+    }
         
     
     private void guestTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guestTabMousePressed
@@ -655,6 +737,42 @@ public class Home extends javax.swing.JFrame {
     // Populate the table with the updated guest list
     populateGuestTable();
     }//GEN-LAST:event_guest_addButtonMousePressed
+
+    private void bookButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookButtonMousePressed
+
+        // Get the selected dates from the date choosers
+            Date checkInDate = checkin_datechooser.getDate();
+            Date checkOutDate = checkout_datechooser.getDate();
+
+            // Get the capacity from the text field
+            int capacity = Integer.parseInt(capacityTextField.getText());
+
+            // Retrieve available rooms for the selected date range
+            try {
+                ReservationManager reservationManager = new ReservationManager();
+                Connection connection = DBConnection.getConnection();
+
+                List<Integer> availableRooms = reservationManager.getAvailableRooms(connection, checkInDate, checkOutDate);
+
+                // Display the available rooms in the table
+                DefaultTableModel model = (DefaultTableModel) availableRoomsTable.getModel();
+                model.setRowCount(0); // Clear existing rows
+
+                for (int roomID : availableRooms) {
+                    // Retrieve room information based on room ID
+                    Room room = RoomManager.getRoomByID(connection, roomID);
+                    if (room.getCapacity() >= capacity) { // Check if room capacity is sufficient
+                        model.addRow(new Object[]{room.getRoomID(), room.getType(), room.getCapacity(), room.getPrice()});
+                    }
+                }
+
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        
+    }//GEN-LAST:event_bookButtonMousePressed
        int xy, xx;
     /**
      * @param args the command line arguments
@@ -708,7 +826,12 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTable GuestTable;
     private javax.swing.JPanel Parent;
     private javax.swing.JPanel TitlePanel;
+    private javax.swing.JTable availableRoomsTable;
+    private javax.swing.JButton bookButton;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField capacityTextField;
+    private com.toedter.calendar.JDateChooser checkin_datechooser;
+    private com.toedter.calendar.JDateChooser checkout_datechooser;
     private javax.swing.JPanel content;
     private javax.swing.JPanel empPage;
     private javax.swing.JPanel empTab;
@@ -730,7 +853,12 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -738,7 +866,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel resPage;
     private javax.swing.JPanel resTab;
     private TheBeachClub.ReservationUI reservationUI1;
@@ -749,4 +879,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel spaPage;
     private javax.swing.JPanel spaTab;
     // End of variables declaration//GEN-END:variables
+
+
 }
