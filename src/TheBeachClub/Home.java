@@ -4,7 +4,6 @@
  */
 package TheBeachClub;
 
-import Project1.GuestUI;
 import java.awt.Color;
 import javax.swing.JPanel;
 import java.sql.Connection;
@@ -15,8 +14,11 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+
 
 
 /**
@@ -26,6 +28,9 @@ import javax.swing.table.TableColumnModel;
 public class Home extends javax.swing.JFrame {
     
         private ReservationManager reservationManager;
+        private GuestUI guestUI;
+
+
 
 
     /**
@@ -34,14 +39,44 @@ public class Home extends javax.swing.JFrame {
     public Home() {
         initComponents();
         setColor(guestTab);
-        resetColor(new JPanel[]{roomTab,resTab,spaTab,empTab});
+        resetColor(new JPanel[]{roomTab,bookTab,spaTab,empTab});
+        
+        // Instantiate and set 
+        this.guestUI = new GuestUI();
+        
+        
+        
         
         
         populateGuestTable(); // Call this method to populate the GuestTable when the form is initialized
+        populateResTable();
         setColumnWidths(); // Call this method to set the column widths
+        reservationManager = new ReservationManager();
 
         
-        reservationManager = new ReservationManager();
+        // Content Pages
+        guestPage.setVisible(true);
+        bookingPage.setVisible(false);
+        roomsPage.setVisible(false);
+        spaPage.setVisible(false);
+        empPage.setVisible(false);
+        guestSelectionPanel.setVisible(false);
+        resPage.setVisible(false);
+        
+        // Add ListSelectionListener to the availableRoomsTable
+        availableRoomsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (!event.getValueIsAdjusting()) {
+                    int selectedRow = availableRoomsTable.getSelectedRow();
+                    if (selectedRow != -1) {
+                        selectRoomButton.setEnabled(true);
+                    } else {
+                        selectRoomButton.setEnabled(false);
+                    }
+                }
+            }
+        });
         
         
     }
@@ -65,17 +100,18 @@ public class Home extends javax.swing.JFrame {
         guestTab = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        resTab = new javax.swing.JPanel();
+        bookTab = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         spaTab = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         empTab = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
+        resTab = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
         TitlePanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         content = new javax.swing.JPanel();
         guestPage = new javax.swing.JPanel();
-        GuestButton = new javax.swing.JButton();
         guest_lastNameTF = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -96,21 +132,31 @@ public class Home extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         roomUI = new TheBeachClub.RoomUI();
         resPage = new javax.swing.JPanel();
+        reservationUI = new TheBeachClub.ReservationUI();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        resTable = new javax.swing.JTable();
+        bookingPage = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        reservationUI1 = new TheBeachClub.ReservationUI();
-        bookButton = new javax.swing.JButton();
+        SearchButton = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         checkin_datechooser = new com.toedter.calendar.JDateChooser();
         checkout_datechooser = new com.toedter.calendar.JDateChooser();
         jScrollPane2 = new javax.swing.JScrollPane();
         availableRoomsTable = new javax.swing.JTable();
-        capacityTextField = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        capacitySpinner = new javax.swing.JSpinner();
+        selectRoomButton = new javax.swing.JButton();
         spaPage = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         empPage = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        guestSelectionPanel = new javax.swing.JPanel();
+        guestUI1 = new TheBeachClub.GuestUI();
+        selectGuestButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        GuestTable1 = new javax.swing.JTable();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -191,33 +237,33 @@ public class Home extends javax.swing.JFrame {
 
         sidepanel.add(guestTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 80, 180, -1));
 
-        resTab.setBackground(new java.awt.Color(237, 237, 237));
-        resTab.addMouseListener(new java.awt.event.MouseAdapter() {
+        bookTab.setBackground(new java.awt.Color(237, 237, 237));
+        bookTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                resTabMousePressed(evt);
+                bookTabMousePressed(evt);
             }
         });
 
-        jLabel8.setText("Reservations");
+        jLabel8.setText("Book");
 
-        javax.swing.GroupLayout resTabLayout = new javax.swing.GroupLayout(resTab);
-        resTab.setLayout(resTabLayout);
-        resTabLayout.setHorizontalGroup(
-            resTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(resTabLayout.createSequentialGroup()
+        javax.swing.GroupLayout bookTabLayout = new javax.swing.GroupLayout(bookTab);
+        bookTab.setLayout(bookTabLayout);
+        bookTabLayout.setHorizontalGroup(
+            bookTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bookTabLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
-        resTabLayout.setVerticalGroup(
-            resTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(resTabLayout.createSequentialGroup()
+        bookTabLayout.setVerticalGroup(
+            bookTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bookTabLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel8)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        sidepanel.add(resTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 140, 180, -1));
+        sidepanel.add(bookTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 140, 180, -1));
 
         spaTab.setBackground(new java.awt.Color(237, 237, 237));
         spaTab.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -278,6 +324,34 @@ public class Home extends javax.swing.JFrame {
 
         sidepanel.add(empTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 310, 180, -1));
 
+        resTab.setBackground(new java.awt.Color(237, 237, 237));
+        resTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                resTabMousePressed(evt);
+            }
+        });
+
+        jLabel23.setText("Reservations");
+
+        javax.swing.GroupLayout resTabLayout = new javax.swing.GroupLayout(resTab);
+        resTab.setLayout(resTabLayout);
+        resTabLayout.setHorizontalGroup(
+            resTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(resTabLayout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jLabel23)
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+        resTabLayout.setVerticalGroup(
+            resTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(resTabLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel23)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        sidepanel.add(resTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 370, 180, -1));
+
         Parent.add(sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 570));
 
         TitlePanel.setBackground(new java.awt.Color(245, 245, 245));
@@ -308,23 +382,27 @@ public class Home extends javax.swing.JFrame {
         content.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         guestPage.setBackground(new java.awt.Color(255, 255, 255));
-
-        GuestButton.setText("Guest");
-        GuestButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                GuestButtonMouseClicked(evt);
-            }
-        });
+        guestPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        guestPage.add(guest_lastNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 200, 139, -1));
 
         jLabel14.setText("Surname");
+        guestPage.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 203, 63, -1));
 
         jLabel15.setText("Email");
+        guestPage.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 244, 63, -1));
 
         jLabel16.setText("Phone No.");
+        guestPage.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 285, 63, -1));
+        guestPage.add(guest_emailTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 241, 139, -1));
+        guestPage.add(guest_emailTF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 282, 139, -1));
+        guestPage.add(guest_idTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 118, 139, -1));
+        guestPage.add(guest_firstNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 159, 139, -1));
 
         jLabel2.setText("ID");
+        guestPage.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 121, -1, -1));
 
         jLabel13.setText("First Name");
+        guestPage.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 162, -1, -1));
 
         guest_addButton.setText("Add");
         guest_addButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -332,9 +410,11 @@ public class Home extends javax.swing.JFrame {
                 guest_addButtonMousePressed(evt);
             }
         });
+        guestPage.add(guest_addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 317, 84, 31));
 
         jLabel17.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
         jLabel17.setText("Information");
+        guestPage.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 76, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(245, 245, 245));
 
@@ -388,130 +468,60 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout guestPageLayout = new javax.swing.GroupLayout(guestPage);
-        guestPage.setLayout(guestPageLayout);
-        guestPageLayout.setHorizontalGroup(
-            guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(guestPageLayout.createSequentialGroup()
-                .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(guestPageLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(GuestButton))
-                    .addGroup(guestPageLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(guest_addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(guestPageLayout.createSequentialGroup()
-                                    .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel13))
-                                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(guest_emailTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(guest_idTF)
-                                            .addComponent(guest_firstNameTF)
-                                            .addComponent(guest_lastNameTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGroup(guestPageLayout.createSequentialGroup()
-                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(guest_emailTF1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(48, 48, 48)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
-        );
-        guestPageLayout.setVerticalGroup(
-            guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(guestPageLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(GuestButton)
-                .addGap(30, 30, 30)
-                .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(guestPageLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabel17)
-                        .addGap(18, 18, 18)
-                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(guest_idTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(guest_firstNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13))
-                        .addGap(18, 18, 18)
-                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(guest_lastNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14))
-                        .addGap(18, 18, 18)
-                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(guest_emailTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15))
-                        .addGap(18, 18, 18)
-                        .addGroup(guestPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(guest_emailTF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(guest_addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
+        guestPage.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(305, 59, -1, -1));
 
         content.add(guestPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 490));
 
         roomsPage.setBackground(new java.awt.Color(255, 255, 255));
+        roomsPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel12.setText("Rooms");
-
-        javax.swing.GroupLayout roomsPageLayout = new javax.swing.GroupLayout(roomsPage);
-        roomsPage.setLayout(roomsPageLayout);
-        roomsPageLayout.setHorizontalGroup(
-            roomsPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roomsPageLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel12)
-                .addGap(140, 140, 140)
-                .addComponent(roomUI, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(336, Short.MAX_VALUE))
-        );
-        roomsPageLayout.setVerticalGroup(
-            roomsPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roomsPageLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(roomsPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(roomUI, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addContainerGap(145, Short.MAX_VALUE))
-        );
+        roomsPage.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 23, -1, -1));
+        roomsPage.add(roomUI, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 23, 555, 322));
 
         content.add(roomsPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, -1));
 
-        resPage.setBackground(new java.awt.Color(255, 255, 255));
         resPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        resPage.add(reservationUI, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 500, 160));
+
+        resTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Reservation ID", "Check In", "Check Out", "Room ID", "Guest ID"
+            }
+        ));
+        jScrollPane4.setViewportView(resTable);
+
+        resPage.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 520, 150));
+
+        content.add(resPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
+
+        bookingPage.setBackground(new java.awt.Color(255, 255, 255));
+        bookingPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setText("Reservations");
-        resPage.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 22, -1, -1));
-        resPage.add(reservationUI1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 197, 597, 287));
+        bookingPage.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 22, -1, -1));
 
-        bookButton.setText("BOOK NOW");
-        bookButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        SearchButton.setText("SEARCH");
+        SearchButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                bookButtonMousePressed(evt);
+                SearchButtonMousePressed(evt);
             }
         });
-        resPage.add(bookButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 87, 133, 40));
+        bookingPage.add(SearchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 133, 40));
 
         jLabel19.setText("CHECK-IN");
-        resPage.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 81, -1, -1));
+        bookingPage.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         jLabel20.setText("CHECK-OUT");
-        resPage.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 81, -1, -1));
-        resPage.add(checkin_datechooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 104, 141, -1));
-        resPage.add(checkout_datechooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 104, 141, -1));
+        bookingPage.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        bookingPage.add(checkin_datechooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 141, 40));
+        bookingPage.add(checkout_datechooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 141, 40));
 
         availableRoomsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -524,15 +534,25 @@ public class Home extends javax.swing.JFrame {
                 "Room No.", "Type", "Capacity", "Price"
             }
         ));
+        availableRoomsTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(availableRoomsTable);
 
-        resPage.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 47, 318, 123));
-        resPage.add(capacityTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 145, 97, 17));
+        bookingPage.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 570, 123));
 
         jLabel21.setText("Capacity");
-        resPage.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 145, -1, -1));
+        bookingPage.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+        bookingPage.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, -1, -1));
+        bookingPage.add(capacitySpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 80, 30));
 
-        content.add(resPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, -1));
+        selectRoomButton.setText("BOOK");
+        selectRoomButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                selectRoomButtonMousePressed(evt);
+            }
+        });
+        bookingPage.add(selectRoomButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, 100, 40));
+
+        content.add(bookingPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, -1));
 
         spaPage.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -580,6 +600,72 @@ public class Home extends javax.swing.JFrame {
 
         content.add(empPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, -1));
 
+        selectGuestButton.setText("SELECT");
+        selectGuestButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                selectGuestButtonMousePressed(evt);
+            }
+        });
+
+        GuestTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "First Name", "Last Name", "Email", "Phone"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        GuestTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(GuestTable1);
+        if (GuestTable1.getColumnModel().getColumnCount() > 0) {
+            GuestTable1.getColumnModel().getColumn(3).setResizable(false);
+            GuestTable1.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        javax.swing.GroupLayout guestSelectionPanelLayout = new javax.swing.GroupLayout(guestSelectionPanel);
+        guestSelectionPanel.setLayout(guestSelectionPanelLayout);
+        guestSelectionPanelLayout.setHorizontalGroup(
+            guestSelectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(guestSelectionPanelLayout.createSequentialGroup()
+                .addGroup(guestSelectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(guestSelectionPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(guestUI1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(guestSelectionPanelLayout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(selectGuestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(533, Short.MAX_VALUE))
+        );
+        guestSelectionPanelLayout.setVerticalGroup(
+            guestSelectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(guestSelectionPanelLayout.createSequentialGroup()
+                .addGroup(guestSelectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(guestSelectionPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(guestSelectionPanelLayout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(guestUI1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(selectGuestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(189, Short.MAX_VALUE))
+        );
+
+        content.add(guestSelectionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         Parent.add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 1100, 490));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -599,37 +685,79 @@ public class Home extends javax.swing.JFrame {
 
     
     
+    
         // GuestTable
         
         private void populateGuestTable() {
-            DefaultTableModel model = (DefaultTableModel) GuestTable.getModel();
-            model.setRowCount(0); // Clear existing rows
+            DefaultTableModel model1 = (DefaultTableModel) GuestTable.getModel();
+    DefaultTableModel model2 = (DefaultTableModel) GuestTable1.getModel();
+    model1.setRowCount(0); // Clear existing rows in GuestTable
+    model2.setRowCount(0); // Clear existing rows in GuestTable1
 
-            try {
-                // Establish database connection
-                Connection connection = DBConnection.getConnection();
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("SELECT guestID, guest_firstName, guest_lastName, guest_email, guest_phone FROM Guest");
+    try {
+        // Establish database connection
+        Connection connection = DBConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT guestID, guest_firstName, guest_lastName, guest_email, guest_phone FROM Guest");
 
-                while (resultSet.next()) {
-                    int guestID = resultSet.getInt("guestID");
-                    String firstName = resultSet.getString("guest_firstName");
-                    String lastName = resultSet.getString("guest_lastName");
-                    String email = resultSet.getString("guest_email");
-                    String phone = resultSet.getString("guest_phone");
+        while (resultSet.next()) {
+            int guestID = resultSet.getInt("guestID");
+            String firstName = resultSet.getString("guest_firstName");
+            String lastName = resultSet.getString("guest_lastName");
+            String email = resultSet.getString("guest_email");
+            String phone = resultSet.getString("guest_phone");
 
-                    model.addRow(new Object[]{guestID, firstName, lastName, email, phone});
-                }
+            // Add data to the first table
+            model1.addRow(new Object[]{guestID, firstName, lastName, email, phone});
+            // Add data to the second table
+            model2.addRow(new Object[]{guestID, firstName, lastName, email, phone});
+        }
 
-                resultSet.close();
-                statement.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        resultSet.close();
+        statement.close();
+        connection.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
         }
         
+         // Populate Table
+    private void populateResTable() {
+    DefaultTableModel model = (DefaultTableModel) resTable.getModel();
+    model.setRowCount(0); // Clear existing rows
+    
+    try {
+        // Establish database connection
+        Connection connection = DBConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT resID, res_checkIn, res_checkOut, ROOM_ID, guestID FROM reservation");
         
+        while (resultSet.next()) {
+            int resID = resultSet.getInt("resID");
+            Date checkInDate = resultSet.getDate("res_checkIn");
+            Date checkOutDate = resultSet.getDate("res_checkOut");
+            int roomID = resultSet.getInt("ROOM_ID");
+            int guestID = resultSet.getInt("guestID");
+            
+            model.addRow(new Object[]{resID, checkInDate, checkOutDate, roomID, guestID});
+        }
+        
+        resultSet.close();
+        statement.close();
+        connection.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+        
+        
+
+       
+
+        
+        
+        
+        // Guest Table Edit
         private void setColumnWidths() {
         TableColumnModel columnModel = GuestTable.getColumnModel();
         columnModel.getColumn(0).setPreferredWidth(50);  // guestID
@@ -639,83 +767,91 @@ public class Home extends javax.swing.JFrame {
         columnModel.getColumn(4).setPreferredWidth(100); // Phone
     }
         
+        
+        // Guest Selection
+        private void showGuestSelectionPanel(int roomID) {
+        // Assuming you have a method to set the currently selected room ID in the guest selection panel
+        roomUI.setSelectedRoomID(roomID);
+    
+        // Set the visibility of the guest selection panel to true
+        guestSelectionPanel.setVisible(true);
+
+        // Hide other panels if needed
+        roomUI.setVisible(false);
+        resPage.setVisible(false);
+        // Hide other panels as needed
+    }
+        
+        
     
     private void guestTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guestTabMousePressed
         // TODO add your handling code here:
         setColor(guestTab);
-        resetColor(new JPanel[]{roomTab,resTab,spaTab,empTab});
+        resetColor(new JPanel[]{roomTab,bookTab,spaTab,empTab,resTab});
         
         guestPage.setVisible(true);
-        resPage.setVisible(false);
+        bookingPage.setVisible(false);
         roomsPage.setVisible(false);
         spaPage.setVisible(false);
         empPage.setVisible(false);
+        resPage.setVisible(false);
     }//GEN-LAST:event_guestTabMousePressed
 
-    private void resTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resTabMousePressed
+    private void bookTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookTabMousePressed
         // TODO add your handling code here:
-        setColor(resTab);
-        resetColor(new JPanel[]{roomTab,guestTab,spaTab,empTab});
+        setColor(bookTab);
+        resetColor(new JPanel[]{roomTab,guestTab,spaTab,empTab,resTab});
         
         guestPage.setVisible(false);
-        resPage.setVisible(true);
+        bookingPage.setVisible(true);
         roomsPage.setVisible(false);
         spaPage.setVisible(false);
         empPage.setVisible(false);
-    }//GEN-LAST:event_resTabMousePressed
+        resPage.setVisible(false);
+    }//GEN-LAST:event_bookTabMousePressed
 
     private void roomTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roomTabMousePressed
         // TODO add your handling code here:
         setColor(roomTab);
-        resetColor(new JPanel[]{resTab,guestTab,spaTab,empTab});
+        resetColor(new JPanel[]{bookTab,guestTab,spaTab,empTab,resTab});
         
         guestPage.setVisible(false);
-        resPage.setVisible(false);
+        bookingPage.setVisible(false);
         roomsPage.setVisible(true);
         spaPage.setVisible(false);
         empPage.setVisible(false);
+        resPage.setVisible(false);
     }//GEN-LAST:event_roomTabMousePressed
 
     private void spaTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spaTabMousePressed
         // TODO add your handling code here:
         setColor(spaTab);
-        resetColor(new JPanel[]{roomTab,guestTab,resTab,empTab});
+        resetColor(new JPanel[]{roomTab,guestTab,bookTab,empTab,resTab});
         
         guestPage.setVisible(false);
-        resPage.setVisible(false);
+        bookingPage.setVisible(false);
         roomsPage.setVisible(false);
         spaPage.setVisible(true);
         empPage.setVisible(false);
+        resPage.setVisible(false);
     }//GEN-LAST:event_spaTabMousePressed
 
     private void empTabMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_empTabMouseReleased
         // TODO add your handling code here:
         setColor(empTab);
-        resetColor(new JPanel[]{roomTab,guestTab,spaTab,resTab});
+        resetColor(new JPanel[]{roomTab,guestTab,spaTab,bookTab,resTab});
     }//GEN-LAST:event_empTabMouseReleased
 
     private void empTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_empTabMousePressed
         // TODO add your handling code here:
         
         guestPage.setVisible(false);
-        resPage.setVisible(false);
+        bookingPage.setVisible(false);
         roomsPage.setVisible(false);
         spaPage.setVisible(false);
         empPage.setVisible(true);
+        resPage.setVisible(false);
     }//GEN-LAST:event_empTabMousePressed
-
-    private void GuestButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuestButtonMouseClicked
-        // TODO add your handling code here:
-        // Create an instance of the GuestUI panel
-    // Create an instance of the GuestUI frame
-    GuestUI guestUI = new GuestUI();
-    
-    // Set the GuestUI frame visible
-    guestUI.setVisible(true);
-    
-    // Hide the current Home frame (optional)
-    this.setVisible(false);
-    }//GEN-LAST:event_GuestButtonMouseClicked
 
     private void guest_addButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guest_addButtonMousePressed
         // TODO add your handling code here:
@@ -738,41 +874,140 @@ public class Home extends javax.swing.JFrame {
     populateGuestTable();
     }//GEN-LAST:event_guest_addButtonMousePressed
 
-    private void bookButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookButtonMousePressed
+    private void SearchButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchButtonMousePressed
 
         // Get the selected dates from the date choosers
+    Date checkInDate = checkin_datechooser.getDate();
+    Date checkOutDate = checkout_datechooser.getDate();
+
+    // Get the capacity from the JSpinner
+    int capacity = (Integer) capacitySpinner.getValue();
+
+    // Retrieve available rooms for the selected date range
+    try {
+        ReservationManager reservationManager = new ReservationManager();
+        Connection connection = DBConnection.getConnection();
+
+        List<Integer> availableRooms = reservationManager.getAvailableRooms(connection, checkInDate, checkOutDate);
+
+        // Display the available rooms in the table
+        DefaultTableModel model = (DefaultTableModel) availableRoomsTable.getModel();
+        model.setRowCount(0); // Clear existing rows
+
+        for (int roomID : availableRooms) {
+            // Retrieve room information based on room ID
+            Room room = RoomManager.getRoomByID(connection, roomID);
+            if (room.getCapacity() >= capacity) { // Check if room capacity is sufficient
+                model.addRow(new Object[]{room.getRoomID(), room.getType(), room.getCapacity(), room.getPrice()});
+            }
+        }
+
+        connection.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+        
+    }//GEN-LAST:event_SearchButtonMousePressed
+
+    private void selectRoomButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectRoomButtonMousePressed
+        // TODO add your handling code here:
+        
+    
+        // Get the selected row index from the availableRoomsTable
+            int selectedRow = availableRoomsTable.getSelectedRow();
+
+            // Check if a row is selected
+            if (selectedRow != -1) {
+                // Assuming the room ID is stored in the first column of the table
+                int selectedRoomID = (int) availableRoomsTable.getValueAt(selectedRow, 0);
+
+                 // Hide the bookingPage panel
+                bookingPage.setVisible(false);
+                
+                // Show the guest selection panel with the selected room ID
+                showGuestSelectionPanel(selectedRoomID);
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "No room selected.");
+            }
+        
+        
+    }//GEN-LAST:event_selectRoomButtonMousePressed
+
+    private void selectGuestButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectGuestButtonMousePressed
+        // Retrieve the selected guest ID from GuestTable1
+    int selectedGuestRow = GuestTable1.getSelectedRow();
+    
+    if (selectedGuestRow != -1) {
+        // Assuming the guest ID is stored in the first column of the table
+        int guestID = (int) GuestTable1.getValueAt(selectedGuestRow, 0);
+
+        // Retrieve the selected room ID from availableRoomsTable
+        int selectedRoomRow = availableRoomsTable.getSelectedRow();
+        if (selectedRoomRow != -1) {
+            int roomID = (int) availableRoomsTable.getValueAt(selectedRoomRow, 0);
+
+            // Get the check-in and check-out dates
             Date checkInDate = checkin_datechooser.getDate();
             Date checkOutDate = checkout_datechooser.getDate();
 
-            // Get the capacity from the text field
-            int capacity = Integer.parseInt(capacityTextField.getText());
+            // Confirm booking with the selected room and guest information
+            String message = "Are you sure you want to book the following?\n\n";
+            message += "Room: " + roomID + "\n"; // Include room information
+            message += "Guest: " + guestID + "\n"; // Include guest information
 
-            // Retrieve available rooms for the selected date range
-            try {
-                ReservationManager reservationManager = new ReservationManager();
-                Connection connection = DBConnection.getConnection();
+            int confirmation = JOptionPane.showConfirmDialog(this, message, "Confirm Booking", JOptionPane.YES_NO_OPTION);
 
-                List<Integer> availableRooms = reservationManager.getAvailableRooms(connection, checkInDate, checkOutDate);
+            if (confirmation == JOptionPane.YES_OPTION) {
+                // Perform the booking action with the selected room data and dates
+                try {
+                    Connection connection = DBConnection.getConnection();
 
-                // Display the available rooms in the table
-                DefaultTableModel model = (DefaultTableModel) availableRoomsTable.getModel();
-                model.setRowCount(0); // Clear existing rows
+                    // Perform the booking action with the selected room data, guest ID, and dates
+                    reservationManager.bookRoom(connection, roomID, guestID, checkInDate, checkOutDate);
 
-                for (int roomID : availableRooms) {
-                    // Retrieve room information based on room ID
-                    Room room = RoomManager.getRoomByID(connection, roomID);
-                    if (room.getCapacity() >= capacity) { // Check if room capacity is sufficient
-                        model.addRow(new Object[]{room.getRoomID(), room.getType(), room.getCapacity(), room.getPrice()});
-                    }
+                    JOptionPane.showMessageDialog(this, "Room booked successfully!");
+
+                    
+                    //Update
+                    populateResTable();
+                    guestSelectionPanel.setVisible(false); //close guest Selection
+                    bookingPage.setVisible(true);
+                    
+                    // Update any UI components if needed
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Error booking room: " + ex.getMessage());
                 }
-
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } else {
+                // User canceled the booking, do nothing or perform appropriate action
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "No room selected.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "No guest selected.");
+    }
 
         
-    }//GEN-LAST:event_bookButtonMousePressed
+    }//GEN-LAST:event_selectGuestButtonMousePressed
+
+    private void resTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resTabMousePressed
+        // TODO add your handling code here:
+        setColor(resTab);
+        resetColor(new JPanel[]{roomTab,bookTab,spaTab,empTab,guestTab});
+        
+        guestPage.setVisible(false);
+        bookingPage.setVisible(false);
+        roomsPage.setVisible(false);
+        spaPage.setVisible(false);
+        empPage.setVisible(false);
+        resPage.setVisible(true);
+        
+
+    }//GEN-LAST:event_resTabMousePressed
        int xy, xx;
     /**
      * @param args the command line arguments
@@ -822,21 +1057,25 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton GuestButton;
     private javax.swing.JTable GuestTable;
+    private javax.swing.JTable GuestTable1;
     private javax.swing.JPanel Parent;
+    private javax.swing.JButton SearchButton;
     private javax.swing.JPanel TitlePanel;
     private javax.swing.JTable availableRoomsTable;
-    private javax.swing.JButton bookButton;
+    private javax.swing.JPanel bookTab;
+    private javax.swing.JPanel bookingPage;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JTextField capacityTextField;
+    private javax.swing.JSpinner capacitySpinner;
     private com.toedter.calendar.JDateChooser checkin_datechooser;
     private com.toedter.calendar.JDateChooser checkout_datechooser;
     private javax.swing.JPanel content;
     private javax.swing.JPanel empPage;
     private javax.swing.JPanel empTab;
     private javax.swing.JPanel guestPage;
+    private javax.swing.JPanel guestSelectionPanel;
     private javax.swing.JPanel guestTab;
+    private TheBeachClub.GuestUI guestUI1;
     private javax.swing.JButton guest_addButton;
     private javax.swing.JTextField guest_emailTF;
     private javax.swing.JTextField guest_emailTF1;
@@ -859,6 +1098,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -869,16 +1109,27 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel resPage;
     private javax.swing.JPanel resTab;
-    private TheBeachClub.ReservationUI reservationUI1;
+    private javax.swing.JTable resTable;
+    private TheBeachClub.ReservationUI reservationUI;
     private javax.swing.JPanel roomTab;
     private TheBeachClub.RoomUI roomUI;
     private javax.swing.JPanel roomsPage;
+    private javax.swing.JButton selectGuestButton;
+    private javax.swing.JButton selectRoomButton;
     private javax.swing.JPanel sidepanel;
     private javax.swing.JPanel spaPage;
     private javax.swing.JPanel spaTab;
     // End of variables declaration//GEN-END:variables
+
+    private void setGuestUI(GuestUI guestUI) {
+        this.guestUI = guestUI; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 
 
 }
